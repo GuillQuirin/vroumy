@@ -1,0 +1,2 @@
+class Vroumy < ApplicationRecord
+end
