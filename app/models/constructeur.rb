@@ -1,0 +1,2 @@
+class Constructeur < ApplicationRecord
+end
