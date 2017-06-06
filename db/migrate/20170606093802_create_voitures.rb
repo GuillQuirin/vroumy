@@ -3,7 +3,6 @@ class CreateVoitures < ActiveRecord::Migration[5.0]
     create_table :voitures do |t|
       t.string :couleur
       t.string :description
-      t.string :immatriculation
 
       t.timestamps
     end
