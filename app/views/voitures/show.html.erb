@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Couleur:</strong>
+  <%= @voiture.couleur %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @voiture.description %>
+</p>
+
+<%= link_to 'Edit', edit_voiture_path(@voiture) %> |
+<%= link_to 'Back', voitures_path %>

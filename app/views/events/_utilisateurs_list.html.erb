@@ -1,0 +1,8 @@
+<% if event.utilisateurs.any? %>
+<%= pokemon.utilisateurs
+			.map{ |m| link_to(m.name, m)}
+			.join(', ') 
+			.html_safe %>
+<% else %>
+	Aucun participant
+<% end %>
