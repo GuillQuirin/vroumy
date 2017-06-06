@@ -1,4 +1,4 @@
-<%= form_for(utilisateur) do |f| %>
+<%= simple_form_for(@utilisateur) do |f| %>
   <% if utilisateur.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(utilisateur.errors.count, "error") %> prohibited this utilisateur from being saved:</h2>
@@ -11,47 +11,71 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :firstName %>
-    <%= f.text_field :firstName %>
+  <div class="row">
+    <div class="form-group col-lg-5">
+      <p>
+        <%= f.input :firstName, label: 'Prénom', class: 'form-control' %>
+      </p>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :lastName %>
-    <%= f.text_field :lastName %>
+  <div class="row">
+    <div class="form-group col-lg-5">
+      <p>
+        <%= f.input :lastName, label: 'Nom', class: 'form-control' %>
+      </p>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :email %>
-    <%= f.text_field :email %>
+  <div class="row">
+    <div class="form-group col-lg-5">
+      <p>
+        <%= f.input :numAddress, label: 'Numéro de rue', class: 'form-control' %>
+      </p>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :numAddress %>
-    <%= f.text_field :numAddress %>
+  <div class="row">
+    <div class="form-group col-lg-5">
+      <p>
+        <%= f.input :address, label: 'Adresse', class: 'form-control' %>
+      </p>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :address %>
-    <%= f.text_field :address %>
+  <div class="row">
+    <div class="form-group col-lg-5">
+      <p>
+        <%= f.input :city, label: 'Ville', class: 'form-control' %>
+      </p>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :city %>
-    <%= f.text_field :city %>
+  <div class="row">
+    <div class="form-group col-lg-5">
+      <p>
+        <%= f.input :phone, label: 'Téléphone', class: 'form-control' %>
+      </p>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :phone %>
-    <%= f.text_field :phone %>
+  <div class="row">
+    <div class="form-group col-lg-5">
+      <p>
+        <%= f.input :email, label: 'Email', class: 'form-control' %>
+      </p>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :isActive %>
-    <%= f.check_box :isActive %>
+  <div class="row">
+    <div class="form-group col-lg-5">
+      <p>
+        <%= f.input :isActive, label: 'Actif', class: 'form-control' %>
+      </p>
+    </div>
   </div>
 
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-actions">
+    <%= f.button :submit, label: 'Créer l\'utilisateur', class: 'btn btn-success' %>
   </div>
 <% end %>

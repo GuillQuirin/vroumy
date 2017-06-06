@@ -1,13 +1,24 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Firstname:</strong>
+  <strong>Prénom : </strong>
   <%= @utilisateur.firstName %>
 </p>
 
 <p>
-  <strong>Lastname:</strong>
+  <strong>Nom : </strong>
   <%= @utilisateur.lastName %>
+</p>
+
+<p>
+  <strong>Adresse : </strong>
+  <%= @utilisateur.numAddress %> <%= @utilisateur.address %>
+  <%= @utilisateur.city %>
+</p>
+
+<p>
+  <strong>Téléphone : </strong>
+  <%= @utilisateur.phone %>
 </p>
 
 <p>
@@ -16,29 +27,9 @@
 </p>
 
 <p>
-  <strong>Numaddress:</strong>
-  <%= @utilisateur.numAddress %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @utilisateur.address %>
-</p>
-
-<p>
-  <strong>City:</strong>
-  <%= @utilisateur.city %>
-</p>
-
-<p>
-  <strong>Phone:</strong>
-  <%= @utilisateur.phone %>
-</p>
-
-<p>
-  <strong>Isactive:</strong>
+  <strong>Statut : </strong>
   <%= @utilisateur.isActive %>
 </p>
 
-<%= link_to 'Edit', edit_utilisateur_path(@utilisateur) %> |
-<%= link_to 'Back', utilisateurs_path %>
+<%= link_to 'Modifier', edit_utilisateur_path(@utilisateur), class:'btn btn-warning' %>
+<%= link_to 'Retour', utilisateurs_path,class:'btn btn-primary' %>
