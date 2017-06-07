@@ -2,11 +2,13 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
+  	<%= f.input :name, label: 'Nom' %>
     <%= f.input :couleur %>
     <%= f.input :description %>
+    <%= f.association :constructeur, label: 'Constructeur', class: 'form-control' %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, label: 'Créer une voiture' %>
+    <%= f.button :submit, value: 'Enregistrer', class:'btn btn-success' %>
   </div>
 <% end %>

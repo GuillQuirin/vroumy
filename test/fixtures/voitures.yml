@@ -3,9 +3,7 @@
 one:
   couleur: MyString
   description: MyString
-  immatriculation: MyString
 
 two:
   couleur: MyString
   description: MyString
-  immatriculation: MyString

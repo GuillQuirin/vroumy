@@ -1,14 +1,24 @@
-<p id="notice"><%= notice %></p>
+<h2>Description de votre voiture </h2>
+<p>
+  <strong>Nom : </strong>
+  <%= @voiture.name %>
+</p>
 
 <p>
-  <strong>Couleur:</strong>
+  <strong>Couleur : </strong>
   <%= @voiture.couleur %>
 </p>
 
 <p>
-  <strong>Description:</strong>
+  <strong>Description : </strong>
   <%= @voiture.description %>
 </p>
 
-<%= link_to 'Edit', edit_voiture_path(@voiture) %> |
-<%= link_to 'Back', voitures_path %>
+<p>
+	<strong>Constructeur : </strong>
+	<%= @voiture.constructeur.name %>
+</p>
+
+
+<%= link_to 'Modifier', edit_voiture_path(@voiture), class:'btn btn-warning'%>
+<%= link_to 'Retour', voitures_path, class:'btn btn-primary' %>

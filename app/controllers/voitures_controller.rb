@@ -25,40 +25,31 @@ class VoituresController < ApplicationController
   # POST /voitures.json
   def create
     @voiture = Voiture.new(voiture_params)
-
-    respond_to do |format|
-      if @voiture.save
-        format.html { redirect_to @voiture, notice: 'Voiture was successfully created.' }
-        format.json { render :show, status: :created, location: @voiture }
-      else
-        format.html { render :new }
-        format.json { render json: @voiture.errors, status: :unprocessable_entity }
-      end
+    if @voiture.save
+      flash[:notice] = "La voiture #{@voiture.name} a bien été créée."
+      redirect_to @voiture
+    else
+      render 'new'
     end
   end
 
   # PATCH/PUT /voitures/1
   # PATCH/PUT /voitures/1.json
   def update
-    respond_to do |format|
-      if @voiture.update(voiture_params)
-        format.html { redirect_to @voiture, notice: 'Voiture was successfully updated.' }
-        format.json { render :show, status: :ok, location: @voiture }
-      else
-        format.html { render :edit }
-        format.json { render json: @voiture.errors, status: :unprocessable_entity }
-      end
+    if @voiture.update(voiture_params)
+      flash[:notice] = "La voiture #{@voiture.name} a bien été mise à jour."
+      redirect_to @voiture
+    else
+      render 'edit'
     end
   end
 
   # DELETE /voitures/1
   # DELETE /voitures/1.json
   def destroy
+    flash[:notice] = "La voiture #{@voiture.name} a bien été supprimée."
     @voiture.destroy
-    respond_to do |format|
-      format.html { redirect_to voitures_url, notice: 'Voiture was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to voitures_path
   end
 
   private
@@ -69,6 +60,11 @@ class VoituresController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def voiture_params
-      params.require(:voiture).permit(:couleur, :description)
+      params.require(:voiture).permit(
+        :name,
+        :couleur, 
+        :description,
+        :constructeur_id
+      )
     end
 end
