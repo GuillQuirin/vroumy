@@ -22,6 +22,7 @@ gem 'will_paginate'
 gem 'will_paginate-bootstrap'
 gem 'devise'
 gem 'paperclip'
+gem 'bootstrap-datepicker-rails'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
