@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170409180110) do
+ActiveRecord::Schema.define(version: 20170607162432) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -24,10 +24,19 @@ ActiveRecord::Schema.define(version: 20170409180110) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "event_utilisateurs", force: :cascade do |t|
+    t.integer  "event_id"
+    t.integer  "utilisateur_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["event_id"], name: "index_event_utilisateurs_on_event_id"
+    t.index ["utilisateur_id"], name: "index_event_utilisateurs_on_utilisateur_id"
+  end
+
   create_table "events", force: :cascade do |t|
     t.string   "name"
-    t.date     "startDate"
-    t.date     "endDate"
+    t.datetime "startDate"
+    t.datetime "endDate"
     t.string   "place"
     t.integer  "rate"
     t.datetime "created_at", null: false
@@ -50,9 +59,12 @@ ActiveRecord::Schema.define(version: 20170409180110) do
   create_table "voitures", force: :cascade do |t|
     t.string   "couleur"
     t.string   "description"
-    t.string   "immatriculation"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.integer  "constructeur_id"
+    t.string   "name"
+    t.index ["constructeur_id"], name: "index_voitures_on_constructeur_id"
+    t.index ["name"], name: "index_voitures_on_name", unique: true
   end
 
   create_table "vroumies", force: :cascade do |t|
