@@ -26,6 +26,7 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     if @event.save
+      flash[:notice] = "L\'évènement #{@event.name} a bien été créé."
       redirect_to @event  
     else
       render 'new'
@@ -47,6 +48,7 @@ class EventsController < ApplicationController
   # DELETE /events/1.json
   def destroy
     @event.destroy
+    flash[:notice] = "L\'évènement #{@event.name} a bien été supprimé."
     redirect_to events_path
   end
 
