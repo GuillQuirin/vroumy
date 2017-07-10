@@ -1,5 +1,7 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
+  before_action :authenticate_utilisateur!, only: [:new, :create]
+  #before_action :set_event, only: [:show, :edit, :update, :destroy]
 
   # GET /events
   # GET /events.json
@@ -53,9 +55,9 @@ class EventsController < ApplicationController
   end
 
   private
-    def set_event
-      @event = Event.find(params[:id])
-    end
+    #def set_event
+    # @event = Event.find(params[:id])
+    #end
 
     def event_params
       params.require(:event).permit(
@@ -64,6 +66,7 @@ class EventsController < ApplicationController
         :endDate, 
         :place, 
         :rate,
+        :avatar,
         utilisateur_ids: []
       )
     end

@@ -1,5 +1,83 @@
 <p id="notice"><%= notice %></p>
 
+<header>
+  <div class="container">
+    <div class="intro-text">
+      <div class="intro-lead-in" id="startchange">Bienvenue sur Vroumy</div>
+      <div class="intro-heading">Organisateur d'évènements autos et motos</div>
+      <a href="#concept" class="page-scroll btn btn-xl">En savoir plus</a>
+    </div>
+  </div>
+</header>
+<section id="concept">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2 class="section-heading">Notre concept</h2>
+        <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+      </div>
+    </div>
+    <div class="row text-center">
+      <div class="col-md-4">
+        <span class="fa-stack fa-4x">
+          <i class="fa fa-circle fa-stack-2x text-primary"></i>
+          <i class="fa fa-users fa-stack-1x fa-inverse"></i>
+        </span>
+        <h4 class="service-heading">Convivialité</h4>
+        <p class="text-muted">Réunir collectionneurs et passionnés facilement.</p>
+      </div>
+      <div class="col-md-4">
+        <span class="fa-stack fa-4x">
+          <i class="fa fa-circle fa-stack-2x text-primary"></i>
+          <i class="fa fa-search fa-stack-1x fa-inverse"></i>
+        </span>
+        <h4 class="service-heading">Praticité</h4>
+        <p class="text-muted">Rechercher un véhicule pour un évènement spécial.</p>
+      </div>
+      <div class="col-md-4">
+        <span class="fa-stack fa-4x">
+          <i class="fa fa-circle fa-stack-2x text-primary"></i>
+          <i class="fa fa-lock fa-stack-1x fa-inverse"></i>
+        </span>
+        <h4 class="service-heading">Web Security</h4>
+        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="events" class="bg-light-gray">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2 class="section-heading">Prochains évènements</h2>
+        <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+      </div>
+    </div>
+    <div class="row">
+      <% @events.each do |event| %>
+      <div class="col-md-4 col-sm-6 portfolio-item">
+        <%= link_to event_url(event.id), class:"portfolio-link" do %>
+          <div class="portfolio-hover">
+            <div class="portfolio-hover-content">
+              <i class="fa fa-plus fa-2x"> <span>d'infos</span></i>
+            </div>
+          </div>
+          <% if event.avatar.exists? %>
+          <img src="<%= event.avatar.url(:medium) %>" class="img-responsive" alt="">
+          <% else %>
+          <img src="/assets/default.png" class="img-responsive" alt="">
+          <% end %>
+        <% end %>
+        <div class="portfolio-caption">
+          <h4><%= event.name %></h4>
+          <p class="text-muted">Du <%= date_format(event.startDate) %> au <%= date_format(event.endDate) %></p>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
 <h1>Evènements à venir</h1>
 
 <table class="table">
@@ -17,17 +95,17 @@
 
   <tbody>
     <% @events.each do |event| %>
-      <tr>
-        <td><%= event.name %></td>
-        <td><%= date_format(event.startDate) %></td>
-        <td><%= date_format(event.endDate) %></td>
-        <td><%= event.place %></td>
-        <td><%= event.rate %></td>
-        <td><%= event.utilisateurs.count %></td>
-        <td><%= link_to 'Afficher', event, class: 'btn btn-info' %></td>
-        <td><%= link_to 'Modifier', edit_event_path(event), class: 'btn btn-warning' %></td>
-        <td><%= link_to 'Supprimer', event, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
-      </tr>
+    <tr>
+      <td><%= event.name %></td>
+      <td><%= date_format(event.startDate) %></td>
+      <td><%= date_format(event.endDate) %></td>
+      <td><%= event.place %></td>
+      <td><%= event.rate %></td>
+      <td><%= event.utilisateurs.count %></td>
+      <td><%= link_to 'Afficher', event, class: 'btn btn-info' %></td>
+      <td><%= link_to 'Modifier', edit_event_path(event), class: 'btn btn-warning' %></td>
+      <td><%= link_to 'Supprimer', event, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
+    </tr>
     <% end %>
   </tbody>
 </table>

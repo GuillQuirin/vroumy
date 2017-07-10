@@ -1,33 +1,39 @@
-<p>
-  <strong>Prénom : </strong>
-  <%= @utilisateur.firstName %>
-</p>
+<div class="col-md-4 col-md-offset-4">
+  <section>
+    <h2>Mon compte</h2>
 
-<p>
-  <strong>Nom : </strong>
-  <%= @utilisateur.lastName %>
-</p>
+    <p>
+      <strong>Pseudo : </strong>
+      <%= @utilisateur.pseudo %>
+    </p>
 
-<p>
-  <strong>Adresse : </strong>
-  <%= @utilisateur.numAddress %> <%= @utilisateur.address %>
-  <%= @utilisateur.city %>
-</p>
+    <p>
+      <strong>Prénom : </strong>
+      <%= @utilisateur.firstName %>
+    </p>
 
-<p>
-  <strong>Téléphone : </strong>
-  <%= @utilisateur.phone %>
-</p>
+    <p>
+      <strong>Nom : </strong>
+      <%= @utilisateur.lastName %>
+    </p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @utilisateur.email %>
-</p>
+    <p>
+      <strong>Adresse : </strong>
+      <%= @utilisateur.numAddress %> <%= @utilisateur.address %>
+      <%= @utilisateur.city %>
+    </p>
 
-<p>
-  <strong>Statut : </strong>
-  <%= @utilisateur.isActive %>
-</p>
+    <p>
+      <strong>Téléphone : </strong>
+      <%= @utilisateur.phone %>
+    </p>
 
-<%= link_to 'Modifier', edit_utilisateur_path(@utilisateur), class:'btn btn-warning' %>
-<%= link_to 'Retour', utilisateurs_path,class:'btn btn-primary' %>
+    <p>
+      <strong>Email : </strong>
+      <%= @utilisateur.email %>
+    </p>
+
+    <%= link_to 'Modifier', edit_utilisateur_path(@utilisateur), class:'btn btn-warning' %>
+    <%= link_to 'Retour', utilisateurs_path,class:'btn btn-primary' %>
+    </section>
+</div>

@@ -1,7 +1,7 @@
 <%= simple_form_for(@utilisateur) do |f| %>
   <% if utilisateur.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(utilisateur.errors.count, "error") %> prohibited this utilisateur from being saved:</h2>
+      <h2><%= pluralize(utilisateur.errors.count, "error") %> empêche l'enregistrement des informations :</h2>
 
       <ul>
       <% utilisateur.errors.full_messages.each do |message| %>
@@ -11,6 +11,13 @@
     </div>
   <% end %>
 
+  <div class="row">
+    <div class="form-group col-lg-5">
+      <p>
+        <%= f.input :pseudo, label: 'Pseudo', class: 'form-control' %>
+      </p>
+    </div>
+  </div>
   <div class="row">
     <div class="form-group col-lg-5">
       <p>
@@ -76,6 +83,7 @@
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, label: 'Créer l\'utilisateur', class: 'btn btn-success' %>
+    <%= f.button :submit, value: 'Valider', class: 'btn btn-success text-uppercase' %>
+    <%= link_to 'Retour', utilisateurs_path, class:'btn btn-primary' %>
   </div>
 <% end %>

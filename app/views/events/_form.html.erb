@@ -2,41 +2,49 @@
   <%= f.error_notification %>
 
   <div class="row">
-    <div class="form-group col-lg-5">
+    <div class="form-group col-xs-8">
       <p>
         <%= f.input :name, label: 'Nom de l\'évènement', class: 'form-control' %>
       </p>
     </div>
   </div>
   <div class="row">
-    <div class="form-group col-lg-5">
+    <div class="form-group col-xs-12">
       <p>
-        <%= f.input :startDate, label: 'Date de début', class: 'form-control', order: [:day, :month, :year], data-provide:'datepicker' %>
+        <%= f.input :startDate, label: 'Date de début', class: 'form-control', order: [:day, :month, :year] %>
       </p>
     </div>
   </div>
   <div class="row">
-    <div class="form-group col-lg-5">
+    <div class="form-group col-xs-12">
       <p>
         <%= f.input :endDate, label: 'Date de fin', class: 'form-control', order: [:day, :month, :year] %>
       </p>
     </div>
   </div>
    <div class="row">
-    <div class="form-group col-lg-5">
+    <div class="form-group col-xs-8">
       <p>
         <%= f.input :place, label: 'Lieu', class: 'form-control' %>
       </p>
     </div>
   </div>
    <div class="row">
-    <div class="form-group col-lg-5">
+    <div class="form-group col-xs-8">
       <p>
         <%= f.input :rate, label: 'Tarif', class: 'form-control' %>
       </p>
     </div>
   </div>
+  <div class="row">
+    <div class="form-group col-xs-8">
+      <p>
+        <%= f.input :avatar, as: :file %>
+      </p>
+    </div>
+  </div>
   <div class="form-actions">
-    <%= f.button :submit, value: 'Créer l\'évènement', class: 'btn btn-success' %>
+    <%= f.button :submit, value: 'Valider', class: 'btn btn-success' %>
+    <%= link_to 'Retour', events_path, class:'btn btn-primary' %>
   </div>
 <% end %>

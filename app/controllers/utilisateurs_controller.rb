@@ -23,7 +23,7 @@ class UtilisateursController < ApplicationController
   def create
     @utilisateur = Utilisateur.new(utilisateur_params)
     if @utilisateur.save
-      flash[:notice] = "L'utilisateur #{@utilisateur.name} a bien été créé."
+      flash[:notice] = "L'utilisateur #{@utilisateur.firstName} a bien été créé."
       redirect_to @voiture
     else
       render 'new'
@@ -32,7 +32,7 @@ class UtilisateursController < ApplicationController
 
   def update
     if @utilisateur.update(utilisateur_params)
-      flash[:notice] = "L'utilisateur #{@utilisateur.name} a bien été mis à jour."
+      flash[:notice] = "L'utilisateur #{@utilisateur.firstName} a bien été mis à jour."
       redirect_to @utilisateur
     else
       render 'edit'
@@ -54,6 +54,7 @@ class UtilisateursController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def utilisateur_params
       params.require(:utilisateur).permit(
+        :pseudo,
         :firstName, 
         :lastName, 
         :email, 

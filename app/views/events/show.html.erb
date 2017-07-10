@@ -1,3 +1,14 @@
+<div class="col-md-6 col-md-offset-2">
+  <section>
+
+<div class="col-md-6">
+<% if @event.avatar.exists? %>
+  <div style="text-align: center; margin-top:20px;">
+    <%= image_tag @event.avatar.url(:medium) %>
+  </div>
+<% end %>
+</div>
+<div class="col-md-6">
 <h2> Détails de l'évènement </h2>
 <p>
   <strong>Nom :</strong>
@@ -28,5 +39,29 @@
   <strong>Participants :</strong>
   <%= render partial: 'utilisateurs_list', locals:{event: @event} %>
 </p>
+<% if can? :update, @event %>
 <%= link_to 'Modifier', edit_event_path(@event), class: 'btn btn-warning' %>
+<% end %>
 <%= link_to 'Retour', events_path, class: 'btn btn-primary' %>
+</div>
+
+<% if !@event.utilisateurs.empty? %>
+<table id="table_id" class="display">
+    <thead>
+        <tr>
+            <th>Pseudo</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+        </tr>
+    </thead>
+    <%= @event.utilisateurs.each do |util| %>
+    <tbody>
+        <tr>
+            <td><% util.name %></td>
+            <td>Row 1 Data 2</td>
+        </tr>
+    </tbody>
+    <% end %>
+</table>
+<% end %>
+</section>
