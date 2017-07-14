@@ -1,5 +1,7 @@
 class Event < ApplicationRecord
 	extend FriendlyId
+	geocoded_by :place
+	after_validation :geocode
 
 	validates :rate, :numericality => { :greater_than_or_equal_to => 0 }
 	has_many :event_utilisateurs

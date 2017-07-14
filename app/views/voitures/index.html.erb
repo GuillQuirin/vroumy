@@ -1,33 +1,43 @@
-<p id="notice"><%= notice %></p>
+<div class="col-md-8 col-md-offset-2">
+  <section class="second_section">
+    <h1>Liste des véhicules</h1>
 
-<h1>Liste des voitures</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Couleur</th>
+          <th>Description</th>
+          <th>Constructeur</th>
+          <th>Modèle</th>
+          <th>Catégorie</th>
+          <th>Mise en circulation</th>
+          <th>Propriétaire</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Nom</th>
-      <th>Couleur</th>
-      <th>Description</th>
-      <th>Constructeur</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+      <tbody>
+        <% @voitures.each do |voiture| %>
+          <tr>
+            <td><%= voiture.name %></td>
+            <td><%= voiture.couleur %></td>
+            <td><%= voiture.description %></td>
+            <td><%= voiture.modele.constructeur.name %></td>
+            <td><%= voiture.modele.name %></td>
+            <td><%= voiture.categorie.name %></td>
+            <td><%= short_date_format(voiture.release) %></td>
+            <td><%= voiture.utilisateur.firstName %></td>
+            <td><%= link_to 'Afficher', voiture, class:'btn btn-info' %></td>
+            <td><%= link_to 'Modifier', edit_voiture_path(voiture), class:'btn btn-warning' %></td>
+            <td><%= link_to 'Supprimer', voiture, method: :delete, data: { confirm: 'Êtes-vous sur de vouloir supprimer cet élément ?' }, class:'btn btn-danger' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 
-  <tbody>
-    <% @voitures.each do |voiture| %>
-      <tr>
-        <td><%= voiture.name %></td>
-        <td><%= voiture.couleur %></td>
-        <td><%= voiture.description %></td>
-        <td><%= voiture.constructeur.name %></td>
-        <td><%= link_to 'Afficher', voiture, class:'btn btn-info' %></td>
-        <td><%= link_to 'Modifier', edit_voiture_path(voiture), class:'btn btn-warning' %></td>
-        <td><%= link_to 'Supprimer', voiture, method: :delete, data: { confirm: 'Êtes-vous sur de vouloir supprimer cet élément ?' }, class:'btn btn-danger' %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    <br>
 
-<br>
-
-<%= link_to 'Ajouter une voiture', new_voiture_path, class:'btn btn-success' %>
+    <%= link_to 'Ajouter une voiture', new_voiture_path, class:'btn btn-success' %>
+  </section>
+</div>

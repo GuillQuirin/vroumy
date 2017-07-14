@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
   rescue_from CanCan::AccessDenied do |exception|
-  	flash[:error] = exception.message
+  	flash[:danger] = exception.message
   	if request.env['HTTP_REFERER'].present?
   		redirect_to :back
   	else

@@ -1,9 +1,10 @@
 class UtilisateursController < ApplicationController
-  before_action :set_utilisateur, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
+  before_action :authenticate_utilisateur!, only: [:show]
 
   # GET /utilisateurs
   def index
-    @utilisateurs = Utilisateur.all
+    @utilisateurs = Utilisateur.includes(:voitures)
   end
 
   # GET /utilisateurs/1
@@ -23,7 +24,7 @@ class UtilisateursController < ApplicationController
   def create
     @utilisateur = Utilisateur.new(utilisateur_params)
     if @utilisateur.save
-      flash[:notice] = "L'utilisateur #{@utilisateur.firstName} a bien été créé."
+      flash[:notice] = "L'utilisateur '#{@utilisateur.firstName}' a bien été créé."
       redirect_to @voiture
     else
       render 'new'
@@ -32,7 +33,7 @@ class UtilisateursController < ApplicationController
 
   def update
     if @utilisateur.update(utilisateur_params)
-      flash[:notice] = "L'utilisateur #{@utilisateur.firstName} a bien été mis à jour."
+      flash[:notice] = "L'utilisateur '#{@utilisateur.firstName}' a bien été mis à jour."
       redirect_to @utilisateur
     else
       render 'edit'
@@ -62,6 +63,7 @@ class UtilisateursController < ApplicationController
         :address, 
         :city, 
         :phone, 
+        :avatar,
         :isActive
       )
     end

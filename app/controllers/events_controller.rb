@@ -6,12 +6,16 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    @events = Event.includes(:utilisateurs)
   end
 
   # GET /events/1
   # GET /events/1.json
   def show
+    @hash = Gmaps4rails.build_markers(@event) do |event, marker|
+      marker.lat event.latitude
+      marker.lng event.longitude
+    end
   end
 
   # GET /events/new
@@ -54,6 +58,16 @@ class EventsController < ApplicationController
     redirect_to events_path
   end
 
+
+  def join_utilisateur
+    @event = Event.find(params[:id])
+    @event.event_utilisateurs.build(:utilisateur_id => current_utilisateur.id)
+    if @event.save
+      flash[:notice] = "Votre inscription à l'évènement '#{@event.name}' a bien été prise en compte."
+      redirect_to event_url(@event)
+    end
+  end
+
   private
     #def set_event
     # @event = Event.find(params[:id])
@@ -67,6 +81,7 @@ class EventsController < ApplicationController
         :place, 
         :rate,
         :avatar,
+        :status,
         utilisateur_ids: []
       )
     end

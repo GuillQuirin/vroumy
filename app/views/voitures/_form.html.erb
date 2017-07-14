@@ -4,11 +4,15 @@
   <div class="form-inputs">
   	<%= f.input :name, label: 'Nom' %>
     <%= f.input :couleur %>
-    <%= f.input :description %>
-    <%= f.association :constructeur, label: 'Constructeur', class: 'form-control' %>
+    <%= f.input :description, as: :text %>
+    <%= f.association :modele, label: 'Modèle', class: 'form-control' %>
+    <%= f.association :categorie, label: 'Catégorie', class: 'form-control' %>
+    <%= f.input :release, label: 'Date de mise en circulation' %>
+    <%= f.input :avatar, as: :file, label: 'Photo du véhicule' %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, value: 'Enregistrer', class:'btn btn-success' %>
+    <%= f.button :submit, value: 'Valider', class:'btn btn-success' %>
+    <%= link_to 'Retour', voitures_path, class:'btn btn-primary' %>
   </div>
 <% end %>

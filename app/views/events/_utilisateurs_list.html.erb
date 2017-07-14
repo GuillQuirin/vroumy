@@ -1,6 +1,6 @@
 <% if event.utilisateurs.any? %>
-<%= pokemon.utilisateurs
-			.map{ |m| link_to(m.name, m)}
+<%= event.utilisateurs
+			.map{ |m| link_to(m.pseudo, m)}
 			.join(', ') 
 			.html_safe %>
 <% else %>

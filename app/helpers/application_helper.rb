@@ -6,4 +6,7 @@ module ApplicationHelper
 	def date_format(date)
 		date.strftime("%d/%m/%Y %I:%M:%S")
 	end
+	def short_date_format(date)
+		date.strftime("%d/%m/%Y")
+	end
 end

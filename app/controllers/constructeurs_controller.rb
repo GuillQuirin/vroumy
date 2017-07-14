@@ -1,8 +1,10 @@
 class ConstructeursController < ApplicationController
-  before_action :set_constructeur, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
+  before_action :authenticate_utilisateur!, only: [:new, :create]
+  #before_action :set_constructeur, only: [:show, :edit, :update, :destroy]
 
   def index
-    @constructeurs = Constructeur.all
+    @constructeurs = Constructeur.paginate(page: params[:page], per_page: 5).includes(:modeles)
   end
 
   def show
@@ -41,9 +43,9 @@ class ConstructeursController < ApplicationController
   end
 
   private
-    def set_constructeur
-      @constructeur = Constructeur.find(params[:id])
-    end
+    #def set_constructeur
+    # @constructeur = Constructeur.find(params[:id])
+    #end
 
     def constructeur_params
       params.require(:constructeur).permit(:name)

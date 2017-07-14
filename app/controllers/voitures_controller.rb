@@ -1,10 +1,11 @@
 class VoituresController < ApplicationController
-  before_action :set_voiture, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
+  before_action :authenticate_utilisateur!, only: [:index]
 
   # GET /voitures
   # GET /voitures.json
   def index
-    @voitures = Voiture.all
+    @voitures = Voiture.includes(:utilisateur)
   end
 
   # GET /voitures/1
@@ -25,6 +26,7 @@ class VoituresController < ApplicationController
   # POST /voitures.json
   def create
     @voiture = Voiture.new(voiture_params)
+    @voiture.utilisateur_id = current_utilisateur.id 
     if @voiture.save
       flash[:notice] = "La voiture #{@voiture.name} a bien été créée."
       redirect_to @voiture
@@ -64,7 +66,11 @@ class VoituresController < ApplicationController
         :name,
         :couleur, 
         :description,
-        :constructeur_id
+        :modele_id,
+        :utilisateur_id,
+        :categorie_id,
+        :avatar,
+        :release
       )
     end
 end

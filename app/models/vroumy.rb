@@ -1,2 +1,0 @@
-class Vroumy < ApplicationRecord
-end

@@ -39,7 +39,14 @@
   <div class="row">
     <div class="form-group col-xs-8">
       <p>
-        <%= f.input :avatar, as: :file %>
+        <%= f.input :avatar, as: :file, label: 'Photo de l\'évènement' %>
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-xs-8">
+      <p>
+        <%= f.input :status, label: 'Actif', class: 'form-control' %>
       </p>
     </div>
   </div>

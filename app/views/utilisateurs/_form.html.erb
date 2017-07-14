@@ -2,7 +2,6 @@
   <% if utilisateur.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(utilisateur.errors.count, "error") %> empêche l'enregistrement des informations :</h2>
-
       <ul>
       <% utilisateur.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -10,7 +9,6 @@
       </ul>
     </div>
   <% end %>
-
   <div class="row">
     <div class="form-group col-lg-5">
       <p>
@@ -25,7 +23,6 @@
       </p>
     </div>
   </div>
-
   <div class="row">
     <div class="form-group col-lg-5">
       <p>
@@ -33,7 +30,6 @@
       </p>
     </div>
   </div>
-
   <div class="row">
     <div class="form-group col-lg-5">
       <p>
@@ -41,7 +37,6 @@
       </p>
     </div>
   </div>
-
   <div class="row">
     <div class="form-group col-lg-5">
       <p>
@@ -49,7 +44,6 @@
       </p>
     </div>
   </div>
-
   <div class="row">
     <div class="form-group col-lg-5">
       <p>
@@ -57,7 +51,6 @@
       </p>
     </div>
   </div>
-
   <div class="row">
     <div class="form-group col-lg-5">
       <p>
@@ -65,7 +58,6 @@
       </p>
     </div>
   </div>
-
   <div class="row">
     <div class="form-group col-lg-5">
       <p>
@@ -73,7 +65,13 @@
       </p>
     </div>
   </div>
-
+  <div class="row">
+    <div class="form-group col-xs-8">
+      <p>
+        <%= f.input :avatar, as: :file, label: 'Photo de profil' %>
+      </p>
+    </div>
+  </div>
   <div class="row">
     <div class="form-group col-lg-5">
       <p>
@@ -84,6 +82,6 @@
 
   <div class="form-actions">
     <%= f.button :submit, value: 'Valider', class: 'btn btn-success text-uppercase' %>
-    <%= link_to 'Retour', utilisateurs_path, class:'btn btn-primary' %>
+    <%= link_to 'Retour', utilisateur_url(utilisateur), class:'btn btn-primary' %>
   </div>
 <% end %>

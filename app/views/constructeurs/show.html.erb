@@ -1,7 +1,16 @@
-<p>
-  <strong>Nom du constructeur :</strong>
-  <%= @constructeur.name %>
-</p>
+<div class="col-md-6 col-md-offset-3">
+  <section class="second_section design_form">
+  <h1>Informations concernant le constructeur </h1>
+	<p>
+	  <strong>Nom du constructeur :</strong>
+	  <%= @constructeur.name %>
+	</p>
+	<p>
+	  <strong>Modèles associés : </strong>
+	  <%= render partial: 'modeles_list', locals:{constructeur: @constructeur} %>
+	</p>
 
-<%= link_to 'Modifier', edit_constructeur_path(@constructeur), class:'btn btn-warning' %>
-<%= link_to 'Retour', constructeurs_path, class:'btn btn-primary' %>
+	<%= link_to 'Modifier', edit_constructeur_path(@constructeur), class:'btn btn-warning' %>
+	<%= link_to 'Retour', constructeurs_path, class:'btn btn-primary' %>
+  </section>
+</div>

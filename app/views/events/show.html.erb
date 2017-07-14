@@ -1,67 +1,95 @@
-<div class="col-md-6 col-md-offset-2">
-  <section>
-
-<div class="col-md-6">
 <% if @event.avatar.exists? %>
-  <div style="text-align: center; margin-top:20px;">
-    <%= image_tag @event.avatar.url(:medium) %>
+<% image = @event.avatar.url %>
+<% else %>
+<% image = "/assets/default.png" %>
+<% end %>
+<header style="background-image: url('<%= image %>')">
+  <div class="intro-text intro-text-bis">
+    <div class="intro-lead-in" id="startchange" style="background: rgba(43, 43, 43, 0.3)"><%= @event.name %></div>
   </div>
-<% end %>
-</div>
-<div class="col-md-6">
-<h2> Détails de l'évènement </h2>
-<p>
-  <strong>Nom :</strong>
-  <%= @event.name %>
-</p>
-
-<p>
-  <strong>Date de début :</strong>
-  <%= date_format(@event.startDate) %>
-</p>
-
-<p>
-  <strong>Date de fin :</strong>
-  <%= date_format(@event.endDate) %>
-</p>
-
-<p>
-  <strong>Lieu :</strong>
-  <%= @event.place%>
-</p>
-
-<p>
-  <strong>Tarif :</strong>
-  <%= @event.rate %>€
-</p>
-
-<p>
-  <strong>Participants :</strong>
-  <%= render partial: 'utilisateurs_list', locals:{event: @event} %>
-</p>
-<% if can? :update, @event %>
-<%= link_to 'Modifier', edit_event_path(@event), class: 'btn btn-warning' %>
-<% end %>
-<%= link_to 'Retour', events_path, class: 'btn btn-primary' %>
-</div>
-
-<% if !@event.utilisateurs.empty? %>
-<table id="table_id" class="display">
-    <thead>
-        <tr>
-            <th>Pseudo</th>
-            <th>Nom</th>
-            <th>Prénom</th>
-        </tr>
-    </thead>
-    <%= @event.utilisateurs.each do |util| %>
-    <tbody>
-        <tr>
-            <td><% util.name %></td>
-            <td>Row 1 Data 2</td>
-        </tr>
-    </tbody>
-    <% end %>
-</table>
-<% end %>
+</header>
+<section class="second_section" style="padding-bottom:20px;">
+  <div class="container text-center">
+    <div class="row">
+      <h1 class="text-center"> Détails de l'évènement 
+        <% if can? :update, @event %>
+        <%= link_to edit_event_path(@event), :class => 'text-uppercase btn btn-warning margin-bottom-9' do %>
+        <i class="fa fa-cog" aria-hidden="true"></i>
+        <% end %>
+        <% end %>
+      </h1>
+      <div id="size-20">
+        <p>
+          Du <strong><%= date_format(@event.startDate) %></strong> au <strong><%= date_format(@event.endDate) %></strong>  
+        </p>
+        <p>
+          <strong>Lieu :</strong>
+          <%= @event.place %>
+        </p>
+        <p>
+          <strong>Tarif :</strong>
+          <%= @event.rate = 0 ? "Gratuit" : @event.rate + "€" %>
+        </p>
+        <p>
+          <strong>Participants :</strong>
+          <%= render partial: 'utilisateurs_list', locals:{event: @event} %>
+        </p>
+        <% if utilisateur_signed_in? %>
+        <% if !@event.utilisateurs.any? { |h| h.id == current_utilisateur.id } %>
+        <%= link_to 'Participer au rassemblement !', join_utilisateur_event_path(@event), class: 'btn btn-primary' %>
+        <% else %>
+        <h2>Vous êtes déjà inscrit à cet évènement !</h2>
+        <% end %>
+        <% else %>
+        <%= link_to 'Connectez-vous pour participer à l\'évènement', new_utilisateur_session_path %>
+        <% end %>
+      </div><br />
+      <a href="#participants" class="btn btn-lg btn-secondary">Voir les participants !</a>
+    </div>
+  </div>
 </section>
+<section id="participants" class="bg-light-gray">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2 class="section-heading" style="margin-top:-30px;">Participants à l'évènement</h2>
+      </div>
+    </div>
+    <div class="row">
+      <% @event.utilisateurs.each do |util| %>
+      <div class="col-md-4 col-sm-6 portfolio-item">
+        <%= link_to event_url(util.id), class:"portfolio-link" do %>
+        <div class="portfolio-hover">
+          <div class="portfolio-hover-content">
+            <i class="fa fa-plus fa-2x"> <span>d'infos</span></i>
+          </div>
+        </div>
+        <% if util.avatar.exists? %>
+        <img src="<%= util.avatar.url(:medium) %>" class="img-responsive" alt="">
+        <% else %>
+        <img src="/assets/default.png" class="img-responsive" alt="">
+        <% end %>
+        <% end %>
+        <div class="portfolio-caption">
+          <h4><%= util.pseudo %></h4>
+          <p class="text-muted">Membre depuis le : <%= short_date_format(util.created_at)%></p>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+<section class="padding-top-50">
+  <h1 class="text-center "> Nous situer </h1>
+  <div id="map" class="col-sm-10 col-sm-offset-1" style='height: 500px;'></div>
+</section>
+<script>
+  handler = Gmaps.build('Google');
+  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+    markers = handler.addMarkers(<%=raw @hash.to_json %>); 
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
+    handler.getMap().setZoom(14);
+  });
+</script>
+
