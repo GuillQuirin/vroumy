@@ -33,6 +33,19 @@
 })(jQuery); // End of use strict
 
 $(document).ready(function() {
-    $('#table_id').DataTable();
-    $('#event_startDate').datepicker();
+    $('#users_table').dataTable( {
+        "language": {
+            "lengthMenu": "Affichage de _MENU_ enregistrements par page",
+            "zeroRecords": "Aucun résultat",
+            "info": "Affichage de la page _PAGE_ sur _PAGES_",
+            "infoEmpty": "Pas de résulat pour la recherche",
+            "infoFiltered": "(filtré sur _MAX_ résultats totaux)",
+            "search" : "Recherche : ",
+            "paginate": {
+                "previous": "Précédent",
+                "next": "Suivant"
+            }
+        }
+    } );
+    $('#startDate').datepicker();
 });

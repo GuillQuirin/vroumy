@@ -1,9 +1,6 @@
 class Event < ApplicationRecord
 	extend FriendlyId
-	geocoded_by :place
-	after_validation :geocode
 
-	validates :rate, :numericality => { :greater_than_or_equal_to => 0 }
 	has_many :event_utilisateurs
 	has_many :utilisateurs, through: :event_utilisateurs
 
@@ -11,6 +8,18 @@ class Event < ApplicationRecord
 		medium: '360x250>',
 		thumb: '100x100>'
 	}
+
+	geocoded_by :place
+	after_validation :geocode
+
+	validates :name, presence: true, uniqueness: {message: "Un évènement porte déjà le même nom"}
+	validates :startDate, presence: true
+	validates :endDate, presence: true
+	validates_date :endDate, presence: true, :on_or_after => :startDate
+	validates :place, presence: true
+	validates :rate, presence: true, :numericality => { :greater_than_or_equal_to => 0 }
+	validates :status, presence: true, :numericality => { :greater_than_or_equal_to => 0 }
+	validates_associated :utilisateurs
 
 	validates_attachment_content_type :avatar, 
 		content_type: /\Aimage/

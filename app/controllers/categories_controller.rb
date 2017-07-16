@@ -2,7 +2,7 @@ class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
 
   def index
-    @categories = Categorie.all
+    @categories = Categorie.includes(:voitures)
   end
 
   def show

@@ -1,16 +1,11 @@
 class EventsController < ApplicationController
   load_and_authorize_resource
-  before_action :authenticate_utilisateur!, only: [:new, :create]
-  #before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_utilisateur!, only: [:show]
 
-  # GET /events
-  # GET /events.json
   def index
     @events = Event.includes(:utilisateurs)
   end
 
-  # GET /events/1
-  # GET /events/1.json
   def show
     @hash = Gmaps4rails.build_markers(@event) do |event, marker|
       marker.lat event.latitude
@@ -18,17 +13,13 @@ class EventsController < ApplicationController
     end
   end
 
-  # GET /events/new
   def new
     @event = Event.new
   end
 
-  # GET /events/1/edit
   def edit
   end
 
-  # POST /events
-  # POST /events.json
   def create
     @event = Event.new(event_params)
     if @event.save
@@ -39,8 +30,6 @@ class EventsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /events/1
-  # PATCH/PUT /events/1.json
   def update
     if @event.update(event_params)
       flash[:notice] = "L\'évènement #{@event.name} a bien été mis à jour."
@@ -50,8 +39,6 @@ class EventsController < ApplicationController
     end
   end
 
-  # DELETE /events/1
-  # DELETE /events/1.json
   def destroy
     @event.destroy
     flash[:notice] = "L\'évènement #{@event.name} a bien été supprimé."
@@ -69,10 +56,6 @@ class EventsController < ApplicationController
   end
 
   private
-    #def set_event
-    # @event = Event.find(params[:id])
-    #end
-
     def event_params
       params.require(:event).permit(
         :name, 
@@ -83,6 +66,6 @@ class EventsController < ApplicationController
         :avatar,
         :status,
         utilisateur_ids: []
-      )
+        )
     end
-end
+  end

@@ -9,4 +9,18 @@ module ApplicationHelper
 	def short_date_format(date)
 		date.strftime("%d/%m/%Y")
 	end
+	def empty_field_name(field)
+		if field
+			return field.name
+		else
+			return '&empty;'.html_safe
+		end
+	end
+	def empty_field(field)
+		if field
+			return field
+		else
+			return '&empty;'.html_safe
+		end
+	end
 end

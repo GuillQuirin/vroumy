@@ -21,7 +21,7 @@ class ConstructeursController < ApplicationController
     @constructeur = Constructeur.new(constructeur_params)
     if @constructeur.save
       flash[:notice] = "Le constructeur #{@constructeur.name} a bien été créé."
-      redirect_to @event  
+      redirect_to @constructeur  
     else
       render 'new'
     end
@@ -30,7 +30,7 @@ class ConstructeursController < ApplicationController
   def update
     if @constructeur.update(constructeur_params)
       flash[:notice] = "Le constructeur #{@constructeur.name} a bien été mis à jour."
-      redirect_to @event
+      redirect_to @constructeur
     else
       render 'edit'
     end
@@ -50,4 +50,4 @@ class ConstructeursController < ApplicationController
     def constructeur_params
       params.require(:constructeur).permit(:name)
     end
-end
+  end

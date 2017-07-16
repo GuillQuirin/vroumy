@@ -32,6 +32,7 @@ gem 'underscore-rails'
 gem 'gmaps4rails'
 gem 'geocoder'
 gem 'email_validator'
+gem 'validates_timeliness'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
