@@ -1,6 +1,10 @@
 <div class="col-md-5 col-md-offset-3">
   <section class="second_section design_form">
-	<h1>Modifier mes informations</h1>
+  	<% if current_utilisateur.has_role?(:admin) %>
+  		<h1>Modifier les informations de l'utilisateur</h1>
+  	<% else %>
+		<h1>Modifier mes informations</h1>
+	<% end %>
 	<%= render 'form', utilisateur: @utilisateur %>
   </section>
 </div>

@@ -1,39 +1,61 @@
-<p id="notice"><%= notice %></p>
+<div class="col-md-10 col-md-offset-1">
+  <section class="second_section">
 
-<h1>Utilisateurs</h1>
+    <h1>Liste des utilisateurs</h1><br />
+    <% if @utilisateurs.any? %>
+      <table class="table" id="users_table">
+        <thead>
+          <tr>
+            <th>Pseudo</th>
+            <th>Prénom</th>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>Adresse</th>
+            <th>Téléphone</th>
+            <th>Statut</th>
+            <th>Rôle</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Prénom</th>
-      <th>Nom</th>
-      <th>Email</th>
-      <th>Adresse</th>
-      <th>Téléphone</th>
-      <th>Statut</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @utilisateurs.each do |utilisateur| %>
-      <tr>
-        <td><%= utilisateur.firstName %></td>
-        <td><%= utilisateur.lastName %></td>
-        <td><%= utilisateur.email %></td>
-        <td><%= utilisateur.numAddress %>
-        <%= utilisateur.address %>
-        <%= utilisateur.city %></td>
-        <td><%= utilisateur.phone %></td>
-        <td><%= utilisateur.isActive %></td>
-        <td><%= link_to 'Afficher', utilisateur, class:'btn btn-info' %></td>
-        <td><%= link_to 'Modifier', edit_utilisateur_path(utilisateur), class:'btn btn-warning' %></td>
-        <td><%= link_to 'Supprimer', utilisateur, method: :delete, data: { confirm: 'Etes-vous sur ?' }, class:'btn btn-danger' %></td>
-      </tr>
+        <tbody>
+          <% @utilisateurs.each do |utilisateur| %>
+            <tr>
+              <td><%= empty_field(utilisateur.pseudo) %></td>
+              <td><%= empty_field(utilisateur.firstName) %></td>
+              <td><%= empty_field(utilisateur.lastName) %></td>
+              <td><%= empty_field(utilisateur.email) %></td>
+              <td>
+                <%= utilisateur.numAddress %> <%= utilisateur.address %><br />
+                <%= utilisateur.city %>
+              </td>
+              <td><%= empty_field(utilisateur.phone) %></td>
+              <td><%= utilisateur.isActive ? 'Actif' : 'Inactif' %></td>
+              <td><%= utilisateur.has_role?(:admin) ? 'Administrateur' : 'Participant' %>
+              <td><%= link_to 'Afficher', utilisateur, class:'btn btn-info' %></td>
+              <td><%= link_to 'Modifier', edit_utilisateur_path(utilisateur), class:'btn btn-warning' %></td>
+              <td><%= button_to 'Supprimer', utilisateur, method: :delete, data: { confirm: 'Etes-vous sur ?' }, class:'btn btn-danger' %></td>
+              <td>  
+                <% if current_utilisateur.has_role?(:admin) %>
+                  <% if !utilisateur.has_role?(:admin) %>
+                    <%= link_to 'Passer administrateur', change_role_utilisateur_path(utilisateur), class:'btn btn-secondary' %>
+                  <% else %>
+                    <%= link_to 'Passer lecteur', change_role_utilisateur_path(utilisateur), class:'btn btn-secondary' %>
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      Pas d'utilisateur enregistré
     <% end %>
-  </tbody>
-</table>
+    <br>
 
-<br>
-
-<%= link_to 'Créer un utilisateur', new_utilisateur_path, class:'btn btn-success' %>
+    <%= link_to 'Créer un utilisateur', new_utilisateur_path, class:'btn btn-success' %>
+  </section>
+</div>

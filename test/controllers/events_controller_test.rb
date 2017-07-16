@@ -45,4 +45,20 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to events_url
   end
+
+  test "generate_index_route_constructeur" do
+    assert_generates "/events", controller: "events", action: "index"
+  end
+
+  test "generate_show_route_constructeur" do
+    assert_generates "/events/1", { controller: "events", action: "show", id: "1" }
+  end
+
+  test "generate_edit_route_constructeur" do
+    assert_generates "/events/1/edit", { controller: "events", action: "edit", id: "1" }
+  end
+
+  test "generate_destroy_route_constructeur" do
+    assert_routing({ method: 'delete', path: '/events/1' }, { controller: "events", action: "destroy", id: "1" })
+  end
 end

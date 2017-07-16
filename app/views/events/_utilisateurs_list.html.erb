@@ -1,5 +1,5 @@
 <% if event.utilisateurs.any? %>
-<%= event.utilisateurs
+	<%= event.utilisateurs
 			.map{ |m| link_to(m.pseudo, m)}
 			.join(', ') 
 			.html_safe %>

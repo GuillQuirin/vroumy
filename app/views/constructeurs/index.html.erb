@@ -1,29 +1,30 @@
 <div class="col-md-5 col-md-offset-3">
   <section class="second_section">
-<h1>Constructeurs</h1>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th>Nom</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @constructeurs.each do |constructeur| %>
-      <tr>
-        <td><%= constructeur.name %></td>
-        
-        <td><%= link_to 'Afficher', constructeur, class:'btn btn-info' %></td>
-        <td><%= link_to 'Modifier', edit_constructeur_path(constructeur), class:'btn btn-warning' %></td>
-        <td><%= link_to 'Supprimer', constructeur, method: :delete, data: { confirm: 'Êtes-vous certain de vouloir supprimer ce constructeur ?' }, class:'btn btn-danger' %></td>
-      </tr>
+    <h1>Constructeurs</h1>
+    <% if @constructeurs.any? %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @constructeurs.each do |constructeur| %>
+            <tr>
+              <td><%= constructeur.name %></td>
+              
+              <td><%= link_to 'Afficher', constructeur, class:'btn btn-info' %></td>
+              <td><%= link_to 'Modifier', edit_constructeur_path(constructeur), class:'btn btn-warning' %></td>
+              <td><%= button_to 'Supprimer', constructeur, method: :delete, data: { confirm: 'Êtes-vous certain de vouloir supprimer ce constructeur ?' }, class:'btn btn-danger' %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      Pas de constructeurs enregistrés
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'Créer constructeur', new_constructeur_path, class:'btn btn-primary' %>
-</section>
+    <br>
+    <%= link_to 'Créer constructeur', new_constructeur_path, class:'btn btn-primary' %>
+  </section>
 </div>

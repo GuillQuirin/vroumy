@@ -9,6 +9,7 @@ Rails.application.config.assets.precompile += %w( bootstrap.min.js )
 Rails.application.config.assets.precompile += %w( agency.js )
 Rails.application.config.assets.precompile += %w( jqBootstrapValidation.js )
 Rails.application.config.assets.precompile += %w( contact_me.js )
+Rails.application.config.assets.precompile += %w( bootstrap-datepicker.min.js )
 
 # Add additional assets to the asset load path
 # Rails.application.config.assets.paths << Emoji.images_path

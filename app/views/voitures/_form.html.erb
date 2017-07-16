@@ -13,6 +13,6 @@
 
   <div class="form-actions">
     <%= f.button :submit, value: 'Valider', class:'btn btn-success' %>
-    <%= link_to 'Retour', voitures_path, class:'btn btn-primary' %>
+    <%= link_to 'Retour', request.referer.present? ? request.referer : default_path, class: 'btn btn-primary' %>
   </div>
 <% end %>

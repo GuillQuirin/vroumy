@@ -10,8 +10,8 @@ class Voiture < ApplicationRecord
 	validates :couleur, presence: true
 	validates :description, presence: true
 	validates :modele_id, presence: true
-	validates :release, presence: true
 	validates :categorie_id, presence: true
+	validates_date :release, presence: true, on_or_before: lambda { Date.current }
 
 	has_attached_file :avatar, styles: {
 		medium: '360x250>',

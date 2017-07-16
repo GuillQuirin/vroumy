@@ -1,19 +1,26 @@
 class Utilisateur < ApplicationRecord
 	extend FriendlyId
+	rolify
 
-	has_many :voitures
-  	rolify
-  	validates :pseudo, presence: true, uniqueness: true
-  	validates :email, email: true
-  	devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
 	has_many :event_utilisateurs
 	has_many :events, through: :event_utilisateurs
+	has_many :voitures
 
 	has_attached_file :avatar, styles: {
 		medium: '360x250>',
 		thumb: '100x100>'
 	}
+
+  	validates :pseudo, presence: true, uniqueness: true
+  	validates :firstName, format: { with: /\A[a-zA-Z]+\z/, message: "Seules les lettres sont autorisées" }, allow_blank: true
+  	validates :lastName, format: { with: /\A[a-zA-Z]+\z/, message: "Seules les lettres sont autorisées" }, allow_blank: true
+  	validates :numAddress, :numericality => { :greater_than_or_equal_to => 1 }, allow_blank: true
+  	validates :city, format: { with: /\A[a-zA-Z]+\z/, message: "Seules les lettres sont autorisées" }, allow_blank: true
+  	validates :phone, :numericality => true, allow_blank: true
+  	validates :email, presence: true, email: true
+
+  	devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
 
 	validates_attachment_content_type :avatar, 
 		content_type: /\Aimage/

@@ -45,4 +45,20 @@ class VoituresControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to voitures_url
   end
+
+  test "generate_index_route_constructeur" do
+    assert_generates "/voitures", controller: "voitures", action: "index"
+  end
+
+  test "generate_show_route_constructeur" do
+    assert_generates "/voitures/1", { controller: "voitures", action: "show", id: "1" }
+  end
+
+  test "generate_edit_route_constructeur" do
+    assert_generates "/voitures/1/edit", { controller: "voitures", action: "edit", id: "1" }
+  end
+
+  test "generate_destroy_route_constructeur" do
+    assert_routing({ method: 'delete', path: '/voitures/1' }, { controller: "voitures", action: "destroy", id: "1" })
+  end
 end

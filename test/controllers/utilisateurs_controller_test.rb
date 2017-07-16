@@ -45,4 +45,20 @@ class UtilisateursControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to utilisateurs_url
   end
+
+  test "generate_index_route_constructeur" do
+    assert_generates "/utilisateurs", controller: "utilisateurs", action: "index"
+  end
+
+  test "generate_show_route_constructeur" do
+    assert_generates "/utilisateurs/1", { controller: "utilisateurs", action: "show", id: "1" }
+  end
+
+  test "generate_edit_route_constructeur" do
+    assert_generates "/utilisateurs/1/edit", { controller: "utilisateurs", action: "edit", id: "1" }
+  end
+
+  test "generate_destroy_route_constructeur" do
+    assert_routing({ method: 'delete', path: '/utilisateurs/1' }, { controller: "utilisateurs", action: "destroy", id: "1" })
+  end
 end

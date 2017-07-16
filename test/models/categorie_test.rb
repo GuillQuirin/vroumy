@@ -1,7 +1,8 @@
 require 'test_helper'
 
 class CategorieTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test "should not save categorie without name" do 
+  	categorie = Categorie.new
+  	assert_not categorie.save , "Création de la catégorie sans nom"
+  end
 end
