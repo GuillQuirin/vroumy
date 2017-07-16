@@ -38,12 +38,12 @@
           <% end %>
         </tbody>
       </table>
-    <% else %>
+    <% else %><br />
       Pas d'évènement enregistré 
     <% end %>
-    <br>
+    <br /><br />
     <% if utilisateur_signed_in? && current_utilisateur.has_role?(:admin) %>
-      <%= link_to 'Créer un évènement', new_event_path, class: 'btn btn-success' %>
+      <%= link_to 'Créer un évènement', new_event_path, class: 'btn btn-primary' %>
     <% end %>
   </section>
 </div>

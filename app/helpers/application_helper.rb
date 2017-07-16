@@ -17,7 +17,7 @@ module ApplicationHelper
 		end
 	end
 	def empty_field(field)
-		if field
+		if !field.empty? || !field.blank?
 			return field
 		else
 			return '&empty;'.html_safe
